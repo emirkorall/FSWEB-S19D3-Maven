@@ -43,13 +43,13 @@ public class SecurityConfig {
 
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/register").permitAll();
+                    auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/welcome/").permitAll();
                     auth.requestMatchers("/account/").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/account/**").hasAnyAuthority("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.POST, "/account/**").hasAnyAuthority("ADMIN");
                     auth.requestMatchers(HttpMethod.PUT, "/account/**").hasAnyAuthority("ADMIN");
-                    auth.requestMatchers(HttpMethod.DELETE, "/account/**").hasAnyAuthority("ADMIN");
+                    auth.requestMatchers(HttpMethod.DELETE, "/account/**").hasAnyAuthority( "ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(Customizer.withDefaults())
