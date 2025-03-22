@@ -234,6 +234,7 @@ class MainTest {
         given(mockMemberRepository.findByEmail(anyString())).willReturn(Optional.empty());
         given(passwordEncoder.encode(anyString())).willReturn("password");
         given(mockRoleRepository.findByAuthority("ADMIN")).willReturn(Optional.of(role));
+
         given(mockMemberRepository.save(any(Member.class))).willReturn(member);
 
         Member registeredMember = authenticationService.register("test@example.com", "password");
